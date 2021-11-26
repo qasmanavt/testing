@@ -23,6 +23,8 @@ connection = pyodbc.connect(
     "Database=testdb;"
     "Trusted_Connection=yes;")
 
+start_text=" Welcome to my Bot!, Please enter your Password "
+vaueable_text="Plese enter valueable string !!!"
  
 first_food_name="Plov"
 price_1=10000

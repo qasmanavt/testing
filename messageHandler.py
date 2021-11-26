@@ -71,4 +71,6 @@ def messageHandler(update: Update, context: CallbackContext):
         printit()   
 
     elif Menu in update.message.text:
-        context.bot.send_message(chat_id=update.effective_chat.id,text=Menu_text)   
+        context.bot.send_message(chat_id=update.effective_chat.id,text=Menu_text) 
+    else:
+        context.bot.send_message(chat_id=update.effective_chat.id, text=vaueable_text)  
