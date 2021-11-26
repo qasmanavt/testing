@@ -10,7 +10,10 @@ Menu_text="sorry this page will be make sooner :) "
 entering_text="Hello ,here you can see user's order!"
 
 Accepted="Accepte"
+Accepted_text="Successfully Accepted!"
+
 Declined="Decline"
+Declined_text="You Rejected Order:("
 status="waiting"
 
 password = "qwerty"

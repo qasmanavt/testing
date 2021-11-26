@@ -1,3 +1,4 @@
+from os import stat
 import threading
 from telegram import *
 from telegram.ext import *
@@ -35,8 +36,8 @@ def messageHandler(update: Update, context: CallbackContext):
             # b=[]
             # for b in b2:
             #     print(b)
-            if "waiting" in b:
-                status_text="waiting"
+            if status in b:
+                status_text=status
                 b=cursor.execute('select  *  from bot2 where status=? ;',status_text).fetchall()
                 
                 for a in b:
@@ -61,11 +62,11 @@ def messageHandler(update: Update, context: CallbackContext):
                     [InlineKeyboardButton(Declined, callback_data="2")]]
                     context.bot.send_message(chat_id=update.effective_chat.id,
                     reply_markup=InlineKeyboardMarkup(buttons2), text=text)     
-                print("uji")
+                print("a")
             elif b is None:
-                print("x")
+                print("b")
             else:
-                print("ey")
+                print("c")
             connection.commit()
         printit()   
 
