@@ -1,4 +1,5 @@
-﻿aiogram==2.15
+﻿suka
+aiogram==2.15
 aiohttp==3.7.4.post0
 APScheduler==3.6.3
 async-timeout==3.0.1
