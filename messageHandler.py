@@ -13,8 +13,8 @@ def messageHandler(update: Update, context: CallbackContext):
  
 
     if password == update.message.text:
-        buttons = [[KeyboardButton("reservations")], [KeyboardButton("menu")]]
-        context.bot.send_message(chat_id=update.effective_chat.id, text="Hello ,here you can see user's order!",
+        buttons = [[KeyboardButton(Reservations)], [KeyboardButton(Menu)]]
+        context.bot.send_message(chat_id=update.effective_chat.id, text=entering_text,
                                  reply_markup=ReplyKeyboardMarkup(buttons))
 
         image = get(url_for_chef).content
@@ -22,34 +22,43 @@ def messageHandler(update: Update, context: CallbackContext):
                                    InputMediaPhoto(image, caption="")])
 
         
-    elif "reservation" in  update.message.text:
+    elif Reservations in  update.message.text:
         global phone_number,list
+        
         def printit():
             threading.Timer(10.0, printit).start()
             time.sleep(5)
-            status_text="waiting"
+            status_text=status
             cursor = connection.cursor()
-            b2=cursor.execute(f'select status  from bot2 where status=? ;',status_text).fetchall()
+            b=cursor.execute(f'select status  from bot2 where status=? ;',status_text).fetchone()
           
-            b=[]
-            for b in b2:
-                print(b)
-                
-        
-            
-                
-            
-            
+            # b=[]
+            # for b in b2:
+            #     print(b)
             if "waiting" in b:
                 status_text="waiting"
                 b=cursor.execute('select  *  from bot2 where status=? ;',status_text).fetchall()
                 
                 for a in b:
-                    text="first food is "+str(a[0])+"\nsecond food is "+str(a[1])+"\nthird food is "+str(a[2])+"\nname :"+str(a[3])+"\nphone number "+str(a[7])
+                    order=""
+                    price=0
+                    if  a[0]>0:
+                        order = order +" "+ first_food_name+" :"+str( a[0])+"\n"
+                        price=price+a[0] * price_1
+                    if a[1]>0:
+                        order = order +" "+ second_food_name+" :"+str(a[1])+"\n"
+                        price = price + a[1] * price_2
+                    if a[2]>0:
+                        order = order + " "+third_food_name+" :"+str(a[2])+"\n"
+                        price = price + a[2] * price_3
+
+                    text=order+"Total price :"+str(price)+" sum"+"\nname :"+str(a[3])+"\nphone number "+str(a[7])
+                    
+                    # text="first food is "+str(a[0])+"\nsecond food is "+str(a[1])+"\nthird food is "+str(a[2])+"\nname :"+str(a[3])+"\nphone number "+str(a[7])
                     
                  
-                    buttons2 = [[InlineKeyboardButton("aceepted", callback_data="1")], 
-                    [InlineKeyboardButton("decline", callback_data="2")]]
+                    buttons2 = [[InlineKeyboardButton(Accepted, callback_data="1")], 
+                    [InlineKeyboardButton(Declined, callback_data="2")]]
                     context.bot.send_message(chat_id=update.effective_chat.id,
                     reply_markup=InlineKeyboardMarkup(buttons2), text=text)     
                 print("uji")
@@ -60,5 +69,5 @@ def messageHandler(update: Update, context: CallbackContext):
             connection.commit()
         printit()   
 
-    elif "menu" in update.message.text:
-        context.bot.send_message(chat_id=update.effective_chat.id,text="sorry this page will be make sooner :) ")   
+    elif Menu in update.message.text:
+        context.bot.send_message(chat_id=update.effective_chat.id,text=Menu_text)   
