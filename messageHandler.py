@@ -1,6 +1,4 @@
 import threading
-import telegram
-from config import TOKEN
 from telegram import *
 from telegram.ext import *
 from requests import *
