@@ -1,4 +1,3 @@
-from os import stat
 import threading
 from telegram import *
 from telegram.ext import *
@@ -27,8 +26,8 @@ def messageHandler(update: Update, context: CallbackContext):
         global phone_number,list
         
         def printit():
-            threading.Timer(10.0, printit).start()
-            time.sleep(5)
+            threading.Timer(15.0, printit).start()
+            time.sleep(7)
             status_text=status
             cursor = connection.cursor()
             b=cursor.execute(f'select status  from bot2 where status=? ;',status_text).fetchone()
@@ -58,7 +57,7 @@ def messageHandler(update: Update, context: CallbackContext):
                     # text="first food is "+str(a[0])+"\nsecond food is "+str(a[1])+"\nthird food is "+str(a[2])+"\nname :"+str(a[3])+"\nphone number "+str(a[7])
                     
                  
-                    buttons2 = [[InlineKeyboardButton(Accepted, callback_data="1")], 
+                    buttons2 = [[InlineKeyboardButton(Accepted, callback_data=str(update.effective_chat.id))], 
                     [InlineKeyboardButton(Declined, callback_data="2")]]
                     context.bot.send_message(chat_id=update.effective_chat.id,
                     reply_markup=InlineKeyboardMarkup(buttons2), text=text)     
@@ -72,5 +71,6 @@ def messageHandler(update: Update, context: CallbackContext):
 
     elif Menu in update.message.text:
         context.bot.send_message(chat_id=update.effective_chat.id,text=Menu_text) 
+
     else:
         context.bot.send_message(chat_id=update.effective_chat.id, text=vaueable_text)  
