@@ -21,13 +21,13 @@ def queryHandler(update: Update, context: CallbackContext):
         connection.commit()
     
 
-    elif "2" in query:
+    elif str(update.effective_chat.id) in query:
         context.bot.send_message(
             chat_id=update.effective_chat.id, text=Declined_text)
         status_text=status
         status3=Declined
         connection.commit()
         cursor = connection.cursor()
-        cursor.execute(f'update bot2 set status=? where status=? ;',
-                        (status3,status_text))
+        cursor.execute(f'update bot2 set status=? where id=? ;',
+                        (status3,int(update.effective_chat.id)))
         connection.commit()

@@ -58,7 +58,7 @@ def messageHandler(update: Update, context: CallbackContext):
                     
                  
                     buttons2 = [[InlineKeyboardButton(Accepted, callback_data=str(update.effective_chat.id))], 
-                    [InlineKeyboardButton(Declined, callback_data="2")]]
+                    [InlineKeyboardButton(Declined, callback_data=str(update.effective_chat.id))]]
                     context.bot.send_message(chat_id=update.effective_chat.id,
                     reply_markup=InlineKeyboardMarkup(buttons2), text=text)     
                 print("a")
