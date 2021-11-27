@@ -30,7 +30,8 @@ def messageHandler(update: Update, context: CallbackContext):
             time.sleep(7)
             status_text=status
             cursor = connection.cursor()
-            b=cursor.execute(f'select status  from bot2 where status=? ;',status_text).fetchone()
+            b=cursor.execute(f'select distinct status  from bot2 where status=? ;',status_text).fetchone() or "abc"
+            print(str(b))
           
             # b=[]
             # for b in b2:
@@ -57,12 +58,12 @@ def messageHandler(update: Update, context: CallbackContext):
                     # text="first food is "+str(a[0])+"\nsecond food is "+str(a[1])+"\nthird food is "+str(a[2])+"\nname :"+str(a[3])+"\nphone number "+str(a[7])
                     
                  
-                    buttons2 = [[InlineKeyboardButton(Accepted, callback_data=str(update.effective_chat.id))], 
-                    [InlineKeyboardButton(Declined, callback_data=str(update.effective_chat.id))]]
+                    buttons2 = [[InlineKeyboardButton(Accepted, callback_data="1")], 
+                    [InlineKeyboardButton(Declined, callback_data="2")]]
                     context.bot.send_message(chat_id=update.effective_chat.id,
                     reply_markup=InlineKeyboardMarkup(buttons2), text=text)     
                 print("a")
-            elif b is None:
+            elif "abc" in b:
                 print("b")
             else:
                 print("c")
