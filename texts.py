@@ -18,10 +18,12 @@ status="waiting"
 
 password = "qwerty"
 connection = pyodbc.connect(
-    "Driver={SQL Server Native Client 11.0};"
-    "Server=LAPTOP-DFK8LR20;"
+    
+    r"Driver={SQL Server};"
+    "Server=sqltestbug.database.windows.net;"
     "Database=testdb;"
-    "Trusted_Connection=yes;")
+    "UID=testdb;"
+    "PWD=Dotaru83")
 
 start_text=" Welcome to my Bot!, Please enter your Password "
 vaueable_text="Plese enter valueable string !!!"
