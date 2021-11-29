@@ -57,11 +57,12 @@ def messageHandler(update: Update, context: CallbackContext):
                     
                     # text="first food is "+str(a[0])+"\nsecond food is "+str(a[1])+"\nthird food is "+str(a[2])+"\nname :"+str(a[3])+"\nphone number "+str(a[7])
                     
-                 
-                    buttons2 = [[InlineKeyboardButton(Accepted, callback_data="1")], 
-                    [InlineKeyboardButton(Declined, callback_data="2")]]
+                
+                    buttons2 = [[InlineKeyboardButton(Accepted, callback_data=str(a[4])+"acc")], 
+                    [InlineKeyboardButton(Declined, callback_data=str(a[4])+"dec")]]
                     context.bot.send_message(chat_id=update.effective_chat.id,
                     reply_markup=InlineKeyboardMarkup(buttons2), text=text)     
+                    
                 print("a")
             elif "abc" in b:
                 print("b")
